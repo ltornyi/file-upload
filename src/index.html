@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File upload</title>
+  <script src="uploader.js"></script>
+</head>
+<body>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" id="p_files" multiple/>
+    <br>
+    <label for="p_chunksize">Chunk size</label>
+    <input type="text" name="chunksize" id="p_chunksize" value="1048576" />
+    <br>
+    <button id="uploadButton" type="button">Upload</button>
+  </form>
+  <script>
+    document.getElementById("uploadButton").addEventListener("click", () => {
+      const fileItem = document.getElementById("p_files");
+      const chunkSize = document.getElementById("p_chunksize").value;
+      Uploader.uploadFilesChunked(fileItem.files, chunkSize);
+    });
+  </script>
+</body>
+</html>
